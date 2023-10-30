@@ -1,6 +1,10 @@
 name: Action tests
 
-on: workflow_dispatch
+on:
+  pull_request:
+    branches:
+      - development
+  workflow_dispatch:
 
 jobs:
   test:
