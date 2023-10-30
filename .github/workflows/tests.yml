@@ -18,3 +18,17 @@ jobs:
 
       - name: List files
         run: ls -la
+
+      - name: Test os
+        if: runner.os != 'ubuntu-latest'
+        run: echo "Not ubuntu"
+      - name: Test os positive
+        if: runner.os == 'ubuntu-latest'
+        run: echo "Ubuntu"
+
+      - name: Echo branch name
+        run: |
+          echo ${{ github.head_ref }}
+          echo ${{ github.base_ref }}
+          echo ${{ github.event.pull_request.head.ref }}
+          echo ${{ github.event.pull_request.base.ref }}
