@@ -4,26 +4,78 @@ on:
   pull_request:
     branches:
       - development
-  workflow_dispatch:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+          - macos-latest
+        node-version:
+          - 16
+          - 18
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: Cache build
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
+        uses: actions/cache@v3
+        with:
+          path: dist
+          key: build-${{ matrix.os }}-node-${{ matrix.node-version }}-branch-${{ github.head_ref }}
 
-      - name: Print directory
-        run: pwd
-
-      - name: List files
-        run: ls -la
-
-      - name: Test os
-        if: runner.os != 'ubuntu-latest'
-        run: echo "Not ubuntu"
-      - name: Test os positive
-        if: runner.os == 'ubuntu-latest'
-        run: echo "Ubuntu"
-      - name: Check os
-        run: "echo OS: ${{ runner.os }}"
+  analyze:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - javascript-typescript
+    steps:
+      - name: Cache build
+        id: cache-build
+        uses: actions/cache@v3
+        with:
+          path: dist
+          key: build-ubuntu-latest-node-18-branch-${{ github.head_ref }}
+      - name: Checkout repository if not cached
+        if: steps.cache-build.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+      - name: Use Node.js 18.x
+        if: steps.cache-build.outputs.cache-hit != 'true'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install dependencies
+        if: steps.cache-build.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Build project
+        if: steps.cache-build.outputs.cache-hit != 'true'
+        run: npm run build
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: /language:${{matrix.language}}
