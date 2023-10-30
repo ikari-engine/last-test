@@ -61,18 +61,6 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Initialize CodeQL
-        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
-        uses: github/codeql-action/init@v2
-        with:
-          languages: ${{ matrix.language }}
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
-      - name: Perform CodeQL Analysis
-        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
-        uses: github/codeql-action/analyze@v2
-        with:
-          category: /language:${{matrix.language}}
 
   test:
     strategy:
@@ -97,9 +85,9 @@ jobs:
         run: npm ci
       - name: Test
         run: npm run test:coverage
-      # - name: Analyze with SonarCloud
-      #   if: (success() || failure()) && matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Needed to push to SonarCloud
+      - name: Analyze with SonarCloud
+        if: (success() || failure()) && matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Needed to push to SonarCloud
