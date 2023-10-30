@@ -38,11 +38,15 @@ jobs:
       - name: Check linting errors
         run: npx eslint .
 
-  build:
+  build-and-analyze:
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node-version: [18]
+        os:
+          - ubuntu-latest
+        node-version:
+          - 18
+        language:
+          - javascript-typescript
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
@@ -56,6 +60,16 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Initialize CodeQL
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+      - name: Perform CodeQL Analysis
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: /language:${{matrix.language}}
 
   test:
     strategy:
@@ -75,31 +89,3 @@ jobs:
         run: npm ci
       - name: Test
         run: npm run test:coverage
-
-  # analyze:
-  # runs-on: ubuntu-latest
-  # timeout-minutes: 360
-  # needs:
-  #   - build
-  # permissions:
-  #   actions: read
-  #   contents: read
-  #   security-events: write
-
-  # strategy:
-  #   fail-fast: false
-  #   matrix:
-  #     language:
-  #       - javascript-typescript
-
-  # steps:
-  #   - name: Checkout repository
-  #     uses: actions/checkout@v4
-  #   - name: Initialize CodeQL
-  #     uses: github/codeql-action/init@v2
-  #     with:
-  #       languages: ${{ matrix.language }}
-  #   - name: Perform CodeQL Analysis
-  #     uses: github/codeql-action/analyze@v2
-  #     with:
-  #       category: /language:${{matrix.language}}
