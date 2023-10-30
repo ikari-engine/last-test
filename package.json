@@ -1,0 +1,50 @@
+{
+  "name": "@ikari-engine/last-test",
+  "version": "0.0.0-development.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "commitlint": "commitlint --edit",
+    "test": "mocha",
+    "test:watch": "npm run test -- --watch",
+    "test:coverage": "nyc npm run test",
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "npm run build -- --watch",
+    "dev": "npm run build:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikari-engine/last-test.git"
+  },
+  "author": "Pedro Xavier Leite Cavadas",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/ikari-engine/last-test/issues"
+  },
+  "homepage": "https://github.com/ikari-engine/last-test#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@types/chai": "^4.3.9",
+    "@types/mocha": "^10.0.3",
+    "@types/sinon": "^10.0.20",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "chai": "^4.3.10",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "^3.0.3",
+    "sinon": "^17.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
