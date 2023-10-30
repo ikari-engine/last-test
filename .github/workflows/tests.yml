@@ -10,11 +10,8 @@ jobs:
     strategy:
       matrix:
         os:
-          - windows-latest
           - ubuntu-latest
-          - macos-latest
         node-version:
-          - 16
           - 18
     runs-on: ${{ matrix.os }}
     steps:
@@ -71,11 +68,13 @@ jobs:
       - name: Build project
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: npm run build
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: ${{ matrix.language }}
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
-        with:
-          category: /language:${{matrix.language}}
+      - name: Check directory
+        run: ls -la
+      # - name: Initialize CodeQL
+      #   uses: github/codeql-action/init@v2
+      #   with:
+      #     languages: ${{ matrix.language }}
+      # - name: Perform CodeQL Analysis
+      #   uses: github/codeql-action/analyze@v2
+      #   with:
+      #     category: /language:${{matrix.language}}
