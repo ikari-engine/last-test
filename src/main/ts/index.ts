@@ -1,9 +1,9 @@
-export function helloWorld(a: number, b: number): number {
-  if (b === 0) {
-    return a / b;
-  } else {
-    return 0;
+export function helloWorld(dummy: boolean): string {
+  const message = "Hello, World!";
+  if (dummy) {
+    return message;
   }
+  return message;
 }
 
 export default helloWorld;

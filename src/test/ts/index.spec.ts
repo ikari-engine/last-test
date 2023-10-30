@@ -4,9 +4,9 @@ import { helloWorld } from "../../main/ts/index";
 
 describe("index", (): void => {
   it("should be defined", (): void => {
-    expect(helloWorld(2, 1)).equals(0);
+    expect(helloWorld(false)).equals("Hello, World!");
   });
   it("should not be defined", (): void => {
-    expect(helloWorld(2, 0)).equals(Infinity);
+    expect(helloWorld(true)).equals("Hello, World!");
   });
 });
