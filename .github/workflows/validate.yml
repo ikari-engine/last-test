@@ -66,6 +66,8 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
       - name: Perform CodeQL Analysis
         if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
         uses: github/codeql-action/analyze@v2
