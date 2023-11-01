@@ -14,7 +14,7 @@
       "prerelease": true
     },
     {
-      "name": "*.*.*",
+      "name": "1-initial-repository",
       "prerelease": "rc"
     }
   ],

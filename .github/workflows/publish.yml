@@ -8,12 +8,6 @@ on:
       - alpha
       - development
       - 1-initialize-repository
-  pull_request:
-    branches:
-      - main
-      - beta
-      - alpha
-      - development
 
 jobs:
   publish:
