@@ -131,15 +131,19 @@ const config = {
     }),
 
   plugins: [
-    [
-      "docusaurus-plugin-typedoc",
-      {
-        entryPoints: process.env.TYPEDOC_ENTRY_POINT
-          ? [process.env.TYPEDOC_ENTRY_POINT]
-          : [],
-        tsconfig: "../last-test/tsconfig.build.json",
-      },
-    ],
+    ...(process.env.TYPEDOC_TSCONFIG
+      ? [
+          [
+            "docusaurus-plugin-typedoc",
+            {
+              entryPoints: process.env.TYPEDOC_ENTRY_POINT
+                ? [process.env.TYPEDOC_ENTRY_POINT]
+                : [],
+              tsconfig: process.env.TYPEDOC_TSCONFIG,
+            },
+          ],
+        ]
+      : []),
   ],
 };
 
