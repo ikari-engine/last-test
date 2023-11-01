@@ -133,3 +133,11 @@ build
 
 # VSCode
 .vscode/
+
+# ESLint configuration file
+.eslintrc.cjs
+
+# Docusaurus configuration files
+babel.config.js
+docusaurus.config.js
+sidebars.js
