@@ -46,8 +46,6 @@ jobs:
           - ubuntu-latest
         node-version:
           - 18
-        language:
-          - javascript-typescript
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
