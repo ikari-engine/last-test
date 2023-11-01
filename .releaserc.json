@@ -1,0 +1,44 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "beta",
+      "prerelease": true
+    },
+    {
+      "name": "alpha",
+      "prerelease": true
+    },
+    {
+      "name": "development",
+      "prerelease": true
+    },
+    {
+      "name": "*.*.*",
+      "prerelease": "rc"
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/exec",
+      {
+        "successCmd": "echo \"success=true\" >> \"$GITHUB_OUTPUT\"; echo \"version=${nextRelease.version}\" >> \"$GITHUB_OUTPUT\";",
+        "failCmd": "echo \"success=false\" >> \"$GITHUB_OUTPUT\""
+      }
+    ],
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "npx prettier --write CHANGELOG.md"
+      }
+    ]
+  ]
+}

@@ -39,7 +39,7 @@ jobs:
       - name: Check linting errors
         run: npx eslint .
 
-  build-and-analyze:
+  build:
     strategy:
       matrix:
         os:
