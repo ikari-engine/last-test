@@ -12,10 +12,6 @@
     {
       "name": "development",
       "prerelease": true
-    },
-    {
-      "name": "1-initialize-repository",
-      "prerelease": "rc"
     }
   ],
   "plugins": [
@@ -23,8 +19,14 @@
     [
       "@semantic-release/exec",
       {
-        "successCmd": "echo \"success=true\" >> \"$GITHUB_OUTPUT\"; echo \"version=${nextRelease.version}\" >> \"$GITHUB_OUTPUT\";",
+        "successCmd": "echo \"success=true\" >> \"$GITHUB_OUTPUT\"",
         "failCmd": "echo \"success=false\" >> \"$GITHUB_OUTPUT\""
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "successCmd": "echo \"version=${nextRelease.version}\" >> \"$GITHUB_OUTPUT\""
       }
     ],
     "@semantic-release/release-notes-generator",
@@ -38,6 +40,15 @@
       "@semantic-release/exec",
       {
         "prepareCmd": "npx prettier --write CHANGELOG.md"
+      }
+    ],
+    "@semantic-release/npm",
+    "@semantic-release/github",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md"],
+        "message": "chore(release): set `package.json` to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
   ]
