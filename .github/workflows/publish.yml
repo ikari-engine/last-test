@@ -59,21 +59,6 @@ jobs:
         with:
           persist-credentials: false
           path: src
-      - name: Setup Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: npm
-          cache-dependency-path: src/package-lock.json
-      - name: Install dependencies
-        run: npm ci
-        working-directory: src
-      - name: Verify integrity
-        run: npm audit signatures
-        working-directory: src
-      - name: Build package
-        run: npm run build
-        working-directory: src
       - name: Checkout repository on documentation branch
         uses: actions/checkout@v4
         with:
@@ -92,11 +77,33 @@ jobs:
       - name: Verify integrity
         run: npm audit signatures
         working-directory: docs
+      - name: Clean API documentation
+        run: rm -rf docs/api
+        working-directory: docs
       - name: Build documentation
         run: TYPEDOC_TSCONFIG="../src/tsconfig.build.json" TYPEDOC_ENTRY_POINT="../src/src/main/ts" npm run docusaurus generate-typedoc
         working-directory: docs
+      - name: Build CHANGELOG.md
+        run: |
+          echo "---" > docs/api/CHANGELOG.md
+          echo "id: changelog" >> docs/api/CHANGELOG.md
+          echo "title: CHANGELOG" >> docs/api/CHANGELOG.md
+          echo "sidebar_label: CHANGELOG" >> docs/api/CHANGELOG.md
+          echo "sidebar_position: 2" >> docs/api/CHANGELOG.md
+          echo "custom_edit_url: null" >> docs/api/CHANGELOG.md
+          echo "---" >> docs/api/CHANGELOG.md
+          echo "" >> docs/api/CHANGELOG.md
+          cat ../src/CHANGELOG.md >> docs/api/CHANGELOG.md
+        working-directory: docs
       - name: Tag documentation
         run: npm run docusaurus docs:version ${{ needs.publish.outputs.VERSION }}
+        working-directory: docs
+      - name: Prettify all new files
+        run: |
+          npx prettier --write docs/api
+          npx prettier --write versions.json
+          npx prettier --write versioned_docs/version-${{ needs.publish.outputs.VERSION }}
+          npx prettier --write versioned_sidebars/version-${{ needs.publish.outputs.VERSION }}-sidebars.json
         working-directory: docs
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
