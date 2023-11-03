@@ -62,7 +62,7 @@ jobs:
         with:
           persist-credentials: false
           path: src
-          ref: ${{ github.ref }}
+          ref: ${{ github.ref }} # checkout the branch that triggered the workflow on newest commit
       - name: Checkout repository on documentation branch
         uses: actions/checkout@v4
         with:
