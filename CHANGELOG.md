@@ -1,3 +1,9 @@
+# [1.0.0-development.4](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.3...v1.0.0-development.4) (2023-11-03)
+
+### Features
+
+- attempt fix ([198e7f3](https://github.com/ikari-engine/last-test/commit/198e7f3b5bd11e3d5f0c71a4fd194bec4664b5bb))
+
 # [1.0.0-development.3](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.2...v1.0.0-development.3) (2023-11-03)
 
 ### Features
