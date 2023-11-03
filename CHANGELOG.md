@@ -1,3 +1,9 @@
+# [1.0.0-development.2](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.1...v1.0.0-development.2) (2023-11-03)
+
+### Features
+
+- partial fix for GitHub action ([fcd3546](https://github.com/ikari-engine/last-test/commit/fcd354627d89d3e1845602e52f3a0381e032b513))
+
 # 1.0.0-development.1 (2023-11-03)
 
 ### Bug Fixes
