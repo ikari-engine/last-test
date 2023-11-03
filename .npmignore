@@ -131,3 +131,39 @@ dist
 
 # VSCode
 .vscode/
+
+# ESLint configuration file
+.eslintrc.cjs
+
+# Source files
+src
+
+# Resource files
+res
+
+# GitHub CI
+.github
+
+# Husky
+.husky
+
+# Development configurations
+.commitlintrc.json
+.eslintignore
+.gitignore
+.lintstagedrc
+.mocharc.json
+.npmignore
+.nycrc.json
+.prettierignore
+.prettierrc
+.releaserc.json
+sonar-project.properties
+tsconfig.build.json
+tsconfig.eslint.json
+tsconfig.json
+typedoc.json
+typedoc.spec.json
+
+# Package lock
+package-lock.json
