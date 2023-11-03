@@ -86,6 +86,7 @@ jobs:
         working-directory: docs
       - name: Build CHANGELOG.md
         run: |
+          ls -la ../src
           echo "---" > docs/api/CHANGELOG.md
           echo "id: changelog" >> docs/api/CHANGELOG.md
           echo "title: CHANGELOG" >> docs/api/CHANGELOG.md
