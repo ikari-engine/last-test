@@ -57,6 +57,12 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.publish.outputs.SUCCESS == 'true' }}
     steps:
+      - name: Debug branch
+        run: |
+          echo ${{ github.ref }}
+          echo ${{ github.event_name }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.base_ref }}
       - name: Checkout repository on source branch
         uses: actions/checkout@v4
         with:
