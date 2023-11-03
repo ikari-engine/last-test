@@ -55,11 +55,8 @@ jobs:
     needs: publish
     environment: deployment
     runs-on: ubuntu-latest
+    if: ${{ needs.publish.outputs.SUCCESS == 'true' }}
     steps:
-      - name: Show version
-        run: |
-          echo ${{ needs.publish.outputs.VERSION }}
-          echo ${{ needs.publish.outputs.SUCCESS }}
       - name: Checkout repository on source branch
         uses: actions/checkout@v4
         with:
