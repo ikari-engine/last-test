@@ -14,6 +14,7 @@ jobs:
     environment: deployment
     outputs:
       VERSION: ${{ steps.publish.outputs.version }}
+      SUCCESS: ${{ steps.publish.outputs.success }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -55,6 +56,10 @@ jobs:
     environment: deployment
     runs-on: ubuntu-latest
     steps:
+      - name: Show version
+        run: |
+          echo ${{ needs.publish.outputs.VERSION }}
+          echo ${{ needs.publish.outputs.SUCCESS }}
       - name: Checkout repository on source branch
         uses: actions/checkout@v4
         with:
