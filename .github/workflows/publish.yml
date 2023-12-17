@@ -120,6 +120,7 @@ jobs:
       #     workdir: docs
       - name: Commit documentation
         run: |
+          git remote set-url origin https://${{ secrets.SERVICE_ACCOUNT_TOKEN }}@github.com/${{ github.repository }}.git/
           git add docs/api/CHANGELOG.md
           git add versions.json
           git add versioned_docs/version-${{ needs.publish.outputs.VERSION }}
