@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/ikari-engine/last-test/compare/v1.1.2...v1.1.3) (2023-12-17)
+
+### Bug Fixes
+
+- test ([d2c9672](https://github.com/ikari-engine/last-test/commit/d2c96727d2056e651a1351cfb381f85d16a9d4bc))
+
 ## [1.1.2](https://github.com/ikari-engine/last-test/compare/v1.1.1...v1.1.2) (2023-12-17)
 
 ### Bug Fixes
