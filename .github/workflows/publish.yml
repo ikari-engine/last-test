@@ -32,24 +32,24 @@ jobs:
         run: npm audit signatures
       - name: Build package
         run: npm run build
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
+      # - name: Import GPG key
+      #   id: import_gpg
+      #   uses: crazy-max/ghaction-import-gpg@v6
+      #   with:
+      #     gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+      #     passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      #     git_user_signingkey: true
+      #     git_commit_gpgsign: true
       - name: Publish package
         id: publish
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.SERVICE_ACCOUNT_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GIT_AUTHOR_NAME: ${{ steps.import_gpg.outputs.name }}
-          GIT_AUTHOR_EMAIL: ${{ steps.import_gpg.outputs.email }}
-          GIT_COMMITTER_NAME: ${{ steps.import_gpg.outputs.name }}
-          GIT_COMMITTER_EMAIL: ${{ steps.import_gpg.outputs.email }}
+          # GIT_AUTHOR_NAME: ${{ steps.import_gpg.outputs.name }}
+          # GIT_AUTHOR_EMAIL: ${{ steps.import_gpg.outputs.email }}
+          # GIT_COMMITTER_NAME: ${{ steps.import_gpg.outputs.name }}
+          # GIT_COMMITTER_EMAIL: ${{ steps.import_gpg.outputs.email }}
 
   update-docs:
     needs: publish
@@ -66,7 +66,7 @@ jobs:
       - name: Checkout repository on documentation branch
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          # persist-credentials: false
           path: docs
           ref: gh-pages
       - name: Setup Node.js 18.x
@@ -103,24 +103,24 @@ jobs:
       - name: Tag documentation
         run: npm run docusaurus docs:version ${{ needs.publish.outputs.VERSION }}
         working-directory: docs
-      - name: Prettify all new files
-        run: |
-          npx prettier --write docs/api
-          npx prettier --write versions.json
-          npx prettier --write versioned_docs/version-${{ needs.publish.outputs.VERSION }}
-          npx prettier --write versioned_sidebars/version-${{ needs.publish.outputs.VERSION }}-sidebars.json
-        working-directory: docs
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-          workdir: docs
+      # - name: Prettify all new files
+      #   run: |
+      #     npx prettier --write docs/api
+      #     npx prettier --write versions.json
+      #     npx prettier --write versioned_docs/version-${{ needs.publish.outputs.VERSION }}
+      #     npx prettier --write versioned_sidebars/version-${{ needs.publish.outputs.VERSION }}-sidebars.json
+      #   working-directory: docs
+      # - name: Import GPG key
+      #   uses: crazy-max/ghaction-import-gpg@v6
+      #   with:
+      #     gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+      #     passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      #     git_user_signingkey: true
+      #     git_commit_gpgsign: true
+      #     workdir: docs
       - name: Commit documentation
         run: |
-          git remote set-url origin https://${{ secrets.SERVICE_ACCOUNT_TOKEN }}@github.com/${{ github.repository }}.git/
+          git add docs/api/CHANGELOG.md
           git add versions.json
           git add versioned_docs/version-${{ needs.publish.outputs.VERSION }}
           git add versioned_sidebars/version-${{ needs.publish.outputs.VERSION }}-sidebars.json
