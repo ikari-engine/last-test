@@ -1,3 +1,9 @@
+# [1.0.0-development.6](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.5...v1.0.0-development.6) (2023-12-17)
+
+### Features
+
+- dummy ([a0440c3](https://github.com/ikari-engine/last-test/commit/a0440c30017c50950888a80dc24c01801d159056))
+
 # [1.0.0-development.5](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.4...v1.0.0-development.5) (2023-12-17)
 
 ### Features
