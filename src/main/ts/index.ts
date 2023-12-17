@@ -4,7 +4,7 @@
  * @returns A string containing the text "Hello, World!"
  */
 export function helloWorld(): string {
-  return "Hello, World! This is an even better version!";
+  return "Hello, World!";
 }
 
 export default helloWorld;
