@@ -1,3 +1,9 @@
+# [1.0.0-development.5](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.4...v1.0.0-development.5) (2023-12-17)
+
+### Features
+
+- test ([3a7083d](https://github.com/ikari-engine/last-test/commit/3a7083d6abecba09f3b5f63e8b99a7d1bdbf27bd))
+
 # 1.0.0-beta.1 (2023-11-04)
 
 ### Bug Fixes
