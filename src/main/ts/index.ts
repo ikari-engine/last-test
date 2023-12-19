@@ -13,7 +13,7 @@ export function helloWorld(): string {
  * @returns A string containing the text "Bye, World!"
  */
 export function byeWorld(): string {
-  return "Hello, World!";
+  return "Bye, World!";
 }
 
 export default { helloWorld, byeWorld };
