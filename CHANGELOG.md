@@ -1,3 +1,9 @@
+# [1.0.0-development.10](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.9...v1.0.0-development.10) (2023-12-19)
+
+### Bug Fixes
+
+- **release:** test ([fba38a1](https://github.com/ikari-engine/last-test/commit/fba38a161d098c23114f407a5e9b58fb89fdf7ce))
+
 # [1.0.0-development.9](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.8...v1.0.0-development.9) (2023-12-19)
 
 ### Bug Fixes
