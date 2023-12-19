@@ -9,6 +9,20 @@ on:
       - development
 
 jobs:
+  sonarcloud:
+    environment: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Analyze with SonarCloud
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Needed to push to SonarCloud
+
   publish:
     runs-on: ubuntu-latest
     environment: deployment
