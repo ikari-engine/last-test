@@ -1,3 +1,9 @@
+# [1.0.0-development.12](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.11...v1.0.0-development.12) (2023-12-19)
+
+### Bug Fixes
+
+- fix ([ccbd42f](https://github.com/ikari-engine/last-test/commit/ccbd42f0a8cd8c8fc9bb01a9c3d4cd2b9047e610))
+
 # [1.0.0-development.11](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.10...v1.0.0-development.11) (2023-12-19)
 
 ### Bug Fixes
