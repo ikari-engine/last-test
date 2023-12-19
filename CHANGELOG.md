@@ -1,3 +1,9 @@
+# [1.0.0-development.13](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.12...v1.0.0-development.13) (2023-12-19)
+
+### Features
+
+- new bye world function ([0a27404](https://github.com/ikari-engine/last-test/commit/0a27404bdcdbf9ba4cce7e377d557a6e7e44af97))
+
 # [1.0.0-development.12](https://github.com/ikari-engine/last-test/compare/v1.0.0-development.11...v1.0.0-development.12) (2023-12-19)
 
 ### Bug Fixes
