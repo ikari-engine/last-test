@@ -1,6 +1,6 @@
 {
   "name": "@ikari-engine/last-test",
-  "version": "0.0.0-development.0",
+  "version": "1.0.0-development.15",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
